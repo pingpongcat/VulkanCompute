@@ -1,0 +1,22 @@
+[
+{
+  "directory": "C:/Users/marz/source/repos/VulkanCompute/build",
+  "command": "C:\\PROGRA~2\\MICROS~4\\2019\\COMMUN~1\\VC\\Tools\\Llvm\\x64\\bin\\clang.exe -IC:/VulkanSDK/1.2.170.0/Include -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -o CMakeFiles\\VulkanCompute.dir\\main.c.obj -c C:\\Users\\marz\\source\\repos\\VulkanCompute\\main.c",
+  "file": "C:/Users/marz/source/repos/VulkanCompute/main.c"
+},
+{
+  "directory": "C:/Users/marz/source/repos/VulkanCompute/build",
+  "command": "C:\\PROGRA~2\\MICROS~4\\2019\\COMMUN~1\\VC\\Tools\\Llvm\\x64\\bin\\clang.exe -IC:/VulkanSDK/1.2.170.0/Include -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -o CMakeFiles\\VulkanCompute.dir\\compute.c.obj -c C:\\Users\\marz\\source\\repos\\VulkanCompute\\compute.c",
+  "file": "C:/Users/marz/source/repos/VulkanCompute/compute.c"
+},
+{
+  "directory": "C:/Users/marz/source/repos/VulkanCompute/build",
+  "command": "C:\\PROGRA~2\\MICROS~4\\2019\\COMMUN~1\\VC\\Tools\\Llvm\\x64\\bin\\clang.exe -IC:/VulkanSDK/1.2.170.0/Include -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -o CMakeFiles\\VulkanCompute.dir\\device.c.obj -c C:\\Users\\marz\\source\\repos\\VulkanCompute\\device.c",
+  "file": "C:/Users/marz/source/repos/VulkanCompute/device.c"
+},
+{
+  "directory": "C:/Users/marz/source/repos/VulkanCompute/build",
+  "command": "C:\\PROGRA~2\\MICROS~4\\2019\\COMMUN~1\\VC\\Tools\\Llvm\\x64\\bin\\clang.exe -IC:/VulkanSDK/1.2.170.0/Include -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -o CMakeFiles\\VulkanCompute.dir\\instance.c.obj -c C:\\Users\\marz\\source\\repos\\VulkanCompute\\instance.c",
+  "file": "C:/Users/marz/source/repos/VulkanCompute/instance.c"
+}
+]

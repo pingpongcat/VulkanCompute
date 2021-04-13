@@ -1,0 +1,3 @@
+C:/Users/marz/source/repos/VulkanCompute/build/CMakeFiles/VulkanCompute.dir
+C:/Users/marz/source/repos/VulkanCompute/build/CMakeFiles/edit_cache.dir
+C:/Users/marz/source/repos/VulkanCompute/build/CMakeFiles/rebuild_cache.dir

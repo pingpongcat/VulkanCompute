@@ -1,0 +1,13 @@
+# ninja log v5
+11	89	6400281424831984	CMakeFiles/VulkanCompute.dir/device.c.obj	e126c8ce3c84e337
+1	121	6400281425151140	CMakeFiles/VulkanCompute.dir/compute.c.obj	5dd196e68a017872
+7	80	6400281805628101	CMakeFiles/VulkanCompute.dir/instance.c.obj	90178a86519b6d44
+1	72	6400282175646296	CMakeFiles/VulkanCompute.dir/main.c.obj	fb1c596b6938c6d0
+7	77	6400282175696166	CMakeFiles/VulkanCompute.dir/instance.c.obj	90178a86519b6d44
+11	97	6400282175909289	CMakeFiles/VulkanCompute.dir/device.c.obj	e126c8ce3c84e337
+1	100	6400282733893965	CMakeFiles/VulkanCompute.dir/device.c.obj	e126c8ce3c84e337
+1	107	6400283701394803	CMakeFiles/VulkanCompute.dir/compute.c.obj	5dd196e68a017872
+8	113	6400283701434691	CMakeFiles/VulkanCompute.dir/device.c.obj	e126c8ce3c84e337
+1	107	6400284984846921	CMakeFiles/VulkanCompute.dir/compute.c.obj	5dd196e68a017872
+1	106	6400285803668148	CMakeFiles/VulkanCompute.dir/compute.c.obj	5dd196e68a017872
+7	108	6400285803687942	CMakeFiles/VulkanCompute.dir/device.c.obj	e126c8ce3c84e337
