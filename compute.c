@@ -1,9 +1,9 @@
-#include <vulkan/vulkan.h>
 #include <string.h>
 #include <stdio.h>
-
+#include <vulkan/vulkan.h>
 #include "compute.h"
 #include "device.h"
+#include "instance.h"
 
 VkCommandBuffer CommandBuffer = VK_NULL_HANDLE;
 
@@ -48,8 +48,8 @@ int Compute(void){
     submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
     submitInfo.commandBufferCount = 1;
     submitInfo.pCommandBuffers = &CommandBuffer;
-
-    if (VkQueueSubmit(ComputingQueue, 1, &submitInfo, NULL) != VK_SUCCESS)
+    
+    if (vkQueueSubmit(ComputingQueue, 1, &submitInfo, NULL) != VK_SUCCESS)
     {
 
         printf("Sumbiting the command bufer failed\n");

@@ -3,14 +3,18 @@
 #include <stdio.h>
 #include <string.h>
 #include "device.h"
+#include "compute.h"
 #include "instance.h"
-
 
 uint32_t ComputeQueueFamilyIndex;
 
+VkDevice LogicalDevice = VK_NULL_HANDLE;
+VkQueue ComputingQueue = VK_NULL_HANDLE;
+VkCommandPool ComputeCmdPool = VK_NULL_HANDLE;
+
 void CreateDeviceAndComuteQueue(void)
 {
-    uint32_t count;
+    uint32_t count = 0;
     vkGetPhysicalDeviceQueueFamilyProperties(PhysicalDevice, &count, NULL);
     VkQueueFamilyProperties families[count];
     vkGetPhysicalDeviceQueueFamilyProperties(PhysicalDevice, &count, families);

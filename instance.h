@@ -1,7 +1,8 @@
 #pragma once
 #include <vulkan/vulkan.h>
 
-extern VkPhysicalDevice PhysicalDevice = VK_NULL_HANDLE;
+extern VkInstance Instance;
+extern VkPhysicalDevice PhysicalDevice;
 
 void GetPhysicalDevice();
 void CreateInstance();

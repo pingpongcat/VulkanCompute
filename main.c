@@ -4,12 +4,13 @@
 
 int main(int argc, char const *argv[])
 {
-    CrateInstance();
+    CreateInstance();
     GetPhysicalDevice();
     CreateDeviceAndComuteQueue();
     CreateCommandPool();    
     PrepareCommandBuffer();
     Compute();
     DestroyCommandPoolAndLogicalDevice();
+    
     return 0;
 }
