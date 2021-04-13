@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "device.h"
 #include "compute.h"
 #include "instance.h"
@@ -14,9 +15,10 @@ VkCommandPool ComputeCmdPool = VK_NULL_HANDLE;
 
 void CreateDeviceAndComuteQueue(void)
 {
-    uint32_t count = 0;
+    uint32_t count = 1;
     vkGetPhysicalDeviceQueueFamilyProperties(PhysicalDevice, &count, NULL);
-    VkQueueFamilyProperties families[count];
+
+    VkQueueFamilyProperties *families = malloc(count * sizeof(VkQueueFamilyProperties));
     vkGetPhysicalDeviceQueueFamilyProperties(PhysicalDevice, &count, families);
 
     printf("Found queue families count: %d\n", count);
@@ -30,8 +32,11 @@ void CreateDeviceAndComuteQueue(void)
     if(ComputeQueueFamilyIndex == count)
     {
         printf("Compute family not found\n");
+        free(families);
         return;
     }
+
+    free(families);
 
     float prio = 1.0f;
 

@@ -1,5 +1,6 @@
 #include <vulkan/vulkan.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "instance.h"
 
@@ -15,10 +16,11 @@ void GetPhysicalDevice(){
         return;
     }
 
-    VkPhysicalDevice devices[count];
+    VkPhysicalDevice *devices = malloc(count * sizeof(VkPhysicalDevice));
+
     vkEnumeratePhysicalDevices(Instance, &count, devices);
 
-    VkPhysicalDeviceProperties devicesProperties[count];
+    VkPhysicalDeviceProperties *devicesProperties = malloc(count * sizeof(VkPhysicalDevice));
 
     for (uint32_t i = 0; i < count; i++)
     {
@@ -34,6 +36,7 @@ void GetPhysicalDevice(){
     }
 
     PhysicalDevice = devices[dedicatedGPUidx];
+    free(devices);
     
 }
 
