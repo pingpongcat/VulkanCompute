@@ -17,27 +17,22 @@ void GetPhysicalDevice(){
     }
 
     VkPhysicalDevice *devices = malloc(count * sizeof(VkPhysicalDevice));
-
     vkEnumeratePhysicalDevices(Instance, &count, devices);
 
-    VkPhysicalDeviceProperties *devicesProperties = malloc(sizeof(VkPhysicalDevice));
-    memset(devicesProperties, 0, sizeof(VkPhysicalDeviceProperties));
-    
-    // Search for descrfete GPU
-    /*
     uint32_t dedicatedGPUidx = 0;
 
     for (uint32_t i = 0; i < count; i++)
     {
-        vkGetPhysicalDeviceProperties(devices[i], devicesProperties);
-        if (devicesProperties->deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
+        VkPhysicalDeviceProperties devicesProperties;
+        vkGetPhysicalDeviceProperties(devices[i], &devicesProperties);
+
+        printf("Found device: %s\n", devicesProperties.deviceName);
+
+        if (devicesProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
             dedicatedGPUidx = i;
-        memset(devicesProperties, 0, sizeof(VkPhysicalDeviceProperties));
     }
 
-    free(devicesProperties);    
     PhysicalDevice = devices[dedicatedGPUidx];
-    */
 
     PhysicalDevice = devices[0];
     free(devices);
