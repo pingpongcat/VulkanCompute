@@ -20,24 +20,27 @@ void GetPhysicalDevice(){
 
     vkEnumeratePhysicalDevices(Instance, &count, devices);
 
-    VkPhysicalDeviceProperties *devicesProperties = malloc(count * sizeof(VkPhysicalDevice));
-
-    for (uint32_t i = 0; i < count; i++)
-    {
-        vkGetPhysicalDeviceProperties(devices[i], devicesProperties);
-    }
+    VkPhysicalDeviceProperties *devicesProperties = malloc(sizeof(VkPhysicalDevice));
+    memset(devicesProperties, 0, sizeof(VkPhysicalDeviceProperties));
     
+    // Search for descrfete GPU
+    /*
     uint32_t dedicatedGPUidx = 0;
 
     for (uint32_t i = 0; i < count; i++)
     {
-        if (devicesProperties[i].deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
+        vkGetPhysicalDeviceProperties(devices[i], devicesProperties);
+        if (devicesProperties->deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
             dedicatedGPUidx = i;
+        memset(devicesProperties, 0, sizeof(VkPhysicalDeviceProperties));
     }
 
+    free(devicesProperties);    
     PhysicalDevice = devices[dedicatedGPUidx];
+    */
+
+    PhysicalDevice = devices[0];
     free(devices);
-    
 }
 
 void CreateInstance()
