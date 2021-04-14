@@ -16,6 +16,8 @@ target_link_libraries(${PROJECT_NAME} Vulkan::Vulkan)
 set(SHADER_SRC shader.comp)
 set(SHADER_BIN comp.spv)
 
-execute_process(COMMAND glslangValidator -V ${SHADER_SRC} -o $SHADER_BIN})
+set(MAKE_CMD "glslangValidator -V ${SHADER_SRC} -o ${SHADER_BIN}")
+
+execute_process(COMMAND MAKE_CMD)
 
 set(CMAKE_C_STANDARD 99)

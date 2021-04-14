@@ -13,16 +13,26 @@ static VkShaderModule CreateComputeShader(void)
 {
     uint8_t shaderData[20000];
 
-    FILE *f = fopen("comp.spv", "rb");
+    FILE *file = fopen("shader.spv", "rb");
 
-    if (f == NULL)
-    {
+    if (file == NULL){
         printf("Failed to open shader file\n");
         return VK_NULL_HANDLE;
     }
 
-    size_t size = fread(shaderData, 1, sizeof(shaderData), f);
-    fclose(f);
+    //fopen_s version
+    /*
+    FILE *f;
+    errno_t err;
+
+    if(err = fopen_s(&f, "shader.spv", "rb") != 0)
+    {
+        printf("Failed to open shader file\n");
+        return VK_NULL_HANDLE;
+    }
+    */
+    size_t size = fread(shaderData, 1, sizeof(shaderData), file);
+    fclose(file);
 
     VkShaderModuleCreateInfo createInfo;
     memset(&createInfo, 0, sizeof(createInfo));
@@ -44,7 +54,7 @@ static void CratePipelineLayout(void)
 {
     VkPipelineLayoutCreateInfo createInfo;
     memset(&createInfo, 0, sizeof(createInfo));
-    createInfo.sType = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO;
+    createInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
 
     if (vkCreatePipelineLayout(LogicalDevice, &createInfo, NULL, &PipelineLayout) != VK_SUCCESS)
     {
@@ -64,7 +74,7 @@ void CreatePipeline(void)
     pipelineInfo.basePipelineIndex = -1;
     pipelineInfo.stage.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
     pipelineInfo.stage.stage = VK_SHADER_STAGE_COMPUTE_BIT;
-    pipelineInfo.stage.pNext = "main";
+    pipelineInfo.stage.pName = "main";
     pipelineInfo.stage.module = CreateComputeShader();
 
     if (vkCreateComputePipelines(LogicalDevice, VK_NULL_HANDLE, 1, &pipelineInfo, NULL, &Pipeline) != VK_SUCCESS)
