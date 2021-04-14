@@ -2,7 +2,6 @@
 #include <vulkan/vulkan.h>
 #include <stdio.h>
 #include <string.h>
-
 #include "pipeline.h"
 #include "device.h"
 
@@ -13,10 +12,9 @@ static VkShaderModule CreateComputeShader(void)
 {
     uint8_t shaderData[20000];
 
-    FILE *file;
-    errno_t err = fopen_s(&file, "shader.spv", "rb");
+    FILE *file = fopen("shader.spv", "rb");
 
-    if(err != 0)
+    if(file != NULL)
     {
         printf("Failed to open shader file\n");
         return VK_NULL_HANDLE;
