@@ -1,7 +1,7 @@
 #include "compute.h"
 #include "instance.h"
 #include "device.h"
-#include "pipeline.c"
+#include "pipeline.h"
 
 int main(int argc, char const *argv[])
 {

@@ -9,7 +9,7 @@
 VkPipeline Pipeline = VK_NULL_HANDLE;
 VkPipelineLayout PipelineLayout = VK_NULL_HANDLE;
 
-VkShaderModule CreateComputeShader(void)
+static VkShaderModule CreateComputeShader(void)
 {
     uint8_t shaderData[20000];
 
@@ -40,7 +40,7 @@ VkShaderModule CreateComputeShader(void)
     return handle;
 }
 
-void CratePipelineLayout(void)
+static void CratePipelineLayout(void)
 {
     VkPipelineLayoutCreateInfo createInfo;
     memset(&createInfo, 0, sizeof(createInfo));
@@ -67,7 +67,7 @@ void CreatePipeline(void)
     pipelineInfo.stage.pNext = "main";
     pipelineInfo.stage.module = CreateComputeShader();
 
-    if (vkCreateComputePipelines(LogicalDevice, NULL, 1, &pipelineInfo, NULL, &Pipeline) != VK_SUCCESS)
+    if (vkCreateComputePipelines(LogicalDevice, VK_NULL_HANDLE, 1, &pipelineInfo, NULL, &Pipeline) != VK_SUCCESS)
     {
         printf("Failed to create pipeline\n");
         return;

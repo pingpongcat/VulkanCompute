@@ -6,6 +6,7 @@
 #include "device.h"
 #include "compute.h"
 #include "instance.h"
+#include "pipeline.h"
 
 uint32_t ComputeQueueFamilyIndex;
 

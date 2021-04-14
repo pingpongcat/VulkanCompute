@@ -6,7 +6,7 @@
 extern VkInstance Instance;
 extern VkPhysicalDevice PhysicalDevice;
 
-void GetPhysicalDevice();
-void CreateInstance();
+void GetPhysicalDevice(void);
+void CreateInstance(void);
 
 #endif // INSTANCE_H

@@ -4,8 +4,8 @@
 extern VkPipeline Pipeline;
 extern VkPipelineLayout PipelineLayout;
 
-void DestroyPipeline(void);
 void CreatePipeline(void);
+void DestroyPipeline(void);
 
 #endif // PIPELINE_H
 

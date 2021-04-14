@@ -52,7 +52,7 @@ int Compute(void){
     submitInfo.commandBufferCount = 1;
     submitInfo.pCommandBuffers = &CommandBuffer;
     
-    if (vkQueueSubmit(ComputingQueue, 1, &submitInfo, NULL) != VK_SUCCESS)
+    if (vkQueueSubmit(ComputingQueue, 1, &submitInfo, VK_NULL_HANDLE) != VK_SUCCESS)
     {
 
         printf("Sumbiting the command bufer failed\n");
