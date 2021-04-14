@@ -25,6 +25,8 @@ void GetPhysicalDevice(){
     {
         VkPhysicalDeviceProperties devicesProperties;
         vkGetPhysicalDeviceProperties(devices[i], &devicesProperties);
+        VkPhysicalDeviceFeatures devicesFeatures;
+        vkGetPhysicalDeviceFeatures(devices[i], &devicesFeatures);
 
         printf("Found device: %s\n", devicesProperties.deviceName);
 

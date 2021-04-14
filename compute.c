@@ -4,6 +4,7 @@
 #include "compute.h"
 #include "device.h"
 #include "instance.h"
+#include "pipeline.h"
 
 VkCommandBuffer CommandBuffer = VK_NULL_HANDLE;
 
@@ -33,6 +34,8 @@ void PrepareCommandBuffer(void)
         return;
     }
 
+
+    vkCmdBindPipeline(CommandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, Pipeline);
     vkCmdDispatch(CommandBuffer, 1, 1, 1);
     if (vkEndCommandBuffer(CommandBuffer) != VK_SUCCESS)
     {
