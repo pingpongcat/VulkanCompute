@@ -1,3 +1,8 @@
+
+#include <vulkan/vulkan.h>
+#include <stdio.h>
+#include <string.h>
+
 #include "pipeline.h"
 #include "device.h"
 
