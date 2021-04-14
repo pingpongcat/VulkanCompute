@@ -8,11 +8,19 @@ src = ['main.c',
 
 executable('VulkanCompute', src, dependencies : vlk_dep)
 
+compiler = meson.get_compiler('c')
+
+if compiler.get_id() == 'gcc'
+    message('Compiler: GCC')
+elif compiler.get_id() == 'clang'
+    message('Compiler: LLVM/clang')
+endif
+
 cs = run_command('glslangValidator', '-V', 'shader.comp', '-o', './build/shader.spv')
 
 # Compile shaders and move them do build directory
 if cs.returncode() != 0
-    print('Could not comile shaders')
+    message('Could not comile shaders')
 endif
 
 output = cs.stdout().strip()

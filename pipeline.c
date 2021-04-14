@@ -13,24 +13,15 @@ static VkShaderModule CreateComputeShader(void)
 {
     uint8_t shaderData[20000];
 
-    FILE *file = fopen("shader.spv", "rb");
+    FILE *file;
+    errno_t err = fopen_s(&file, "shader.spv", "rb");
 
-    if (file == NULL){
-        printf("Failed to open shader file\n");
-        return VK_NULL_HANDLE;
-    }
-
-    //fopen_s version
-    /*
-    FILE *f;
-    errno_t err;
-
-    if(err = fopen_s(&f, "shader.spv", "rb") != 0)
+    if(err != 0)
     {
         printf("Failed to open shader file\n");
         return VK_NULL_HANDLE;
     }
-    */
+    
     size_t size = fread(shaderData, 1, sizeof(shaderData), file);
     fclose(file);
 

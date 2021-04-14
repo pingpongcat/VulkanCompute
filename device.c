@@ -18,8 +18,7 @@ void CreateDeviceAndComuteQueue(void)
 {
     uint32_t count = 1;
     vkGetPhysicalDeviceQueueFamilyProperties(PhysicalDevice, &count, NULL);
-
-    VkQueueFamilyProperties *families = malloc(count * sizeof(VkQueueFamilyProperties));
+    VkQueueFamilyProperties families[count];
     vkGetPhysicalDeviceQueueFamilyProperties(PhysicalDevice, &count, families);
 
     printf("Found queue families count: %d\n", count);
@@ -36,8 +35,6 @@ void CreateDeviceAndComuteQueue(void)
         free(families);
         return;
     }
-
-    free(families);
 
     float prio = 1.0f;
 

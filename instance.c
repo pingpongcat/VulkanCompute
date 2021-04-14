@@ -16,7 +16,7 @@ void GetPhysicalDevice(){
         return;
     }
 
-    VkPhysicalDevice *devices = malloc(count * sizeof(VkPhysicalDevice));
+    VkPhysicalDevice devices[count];
     vkEnumeratePhysicalDevices(Instance, &count, devices);
 
     uint32_t dedicatedGPUidx = 0;
@@ -37,7 +37,6 @@ void GetPhysicalDevice(){
     PhysicalDevice = devices[dedicatedGPUidx];
 
     PhysicalDevice = devices[0];
-    free(devices);
 }
 
 void CreateInstance()
