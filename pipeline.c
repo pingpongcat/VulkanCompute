@@ -52,17 +52,17 @@ void CreatePipeline(void)
 {
     CratePipelineLayout();
 
-    VkComputePipelineCreateInfo createPipeline;
-    memset(&createPipeline, 0, sizeof(createPipeline));
-    createPipeline.sType = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO;
-    createPipeline.layout = PipelineLayout;
-    createPipeline.basePipelineIndex = -1;
-    createPipeline.stage.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-    createPipeline.stage.stage = VK_SHADER_STAGE_COMPUTE_BIT;
-    createPipeline.stage.pNext = "main";
-    createPipeline.stage.module = CreateComputeShader();
+    VkComputePipelineCreateInfo pipelineInfo;
+    memset(&pipelineInfo, 0, sizeof(pipelineInfo));
+    pipelineInfo.sType = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO;
+    pipelineInfo.layout = PipelineLayout;
+    pipelineInfo.basePipelineIndex = -1;
+    pipelineInfo.stage.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+    pipelineInfo.stage.stage = VK_SHADER_STAGE_COMPUTE_BIT;
+    pipelineInfo.stage.pNext = "main";
+    pipelineInfo.stage.module = CreateComputeShader();
 
-    if (vkCreatePipelineLayout(LogicalDevice, &createPipeline, NULL, &Pipeline) != VK_SUCCESS)
+    if (vkCreateComputePipelines(LogicalDevice, NULL, 1, &pipelineInfo, NULL, &Pipeline) != VK_SUCCESS)
     {
         printf("Failed to create pipeline\n");
         return;
