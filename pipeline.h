@@ -1,5 +1,4 @@
-#if !defined(PIPELINE_H)
-#define PIPELINE_H
+#pragma once
 
 extern VkPipeline Pipeline;
 extern VkPipelineLayout PipelineLayout;
@@ -7,5 +6,4 @@ extern VkPipelineLayout PipelineLayout;
 void CreatePipeline(void);
 void DestroyPipeline(void);
 
-#endif // PIPELINE_H
 

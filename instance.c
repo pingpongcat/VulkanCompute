@@ -4,6 +4,10 @@
 #include <string.h>
 #include "instance.h"
 
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
 VkInstance Instance = VK_NULL_HANDLE;
 VkPhysicalDevice PhysicalDevice = VK_NULL_HANDLE;
 
@@ -42,11 +46,11 @@ void GetPhysicalDevice(){
 void CreateInstance()
 {
     const char *layers[] = {"VK_LAYER_KHRONOS_validation"};
-    VkInstanceCreateInfo instanceCreateInfo;
-    memset(&instanceCreateInfo, 0, sizeof(instanceCreateInfo));
-    instanceCreateInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-    instanceCreateInfo.enabledLayerCount = 1;
-    instanceCreateInfo.ppEnabledLayerNames = layers;
+    VkInstanceCreateInfo instanceCreateInfo = {
+        .sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
+        .enabledLayerCount = 1,
+        .ppEnabledLayerNames = layers,
+    };
 
    if (vkCreateInstance(&instanceCreateInfo, NULL, &Instance) != VK_SUCCESS)
    {

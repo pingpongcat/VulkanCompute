@@ -1,5 +1,4 @@
-#if !defined(DEVICE_H)
-#define DEVICE_H
+#pragma once
 
 #include <vulkan/vulkan.h>
 
@@ -10,6 +9,4 @@ extern VkCommandPool ComputeCmdPool;
 void CreateDeviceAndComuteQueue(void);
 void CreateCommandPool(void);
 void DestroyCommandPoolAndLogicalDevice(void);
-
-#endif // DEVICE_H
 

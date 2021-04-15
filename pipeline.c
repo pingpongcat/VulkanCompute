@@ -23,11 +23,11 @@ static VkShaderModule CreateComputeShader(void)
     size_t size = fread(shaderData, 1, sizeof(shaderData), file);
     fclose(file);
 
-    VkShaderModuleCreateInfo createInfo;
-    memset(&createInfo, 0, sizeof(createInfo));
-    createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-    createInfo.codeSize = size;
-    createInfo.pCode = (uint32_t *)shaderData;
+    VkShaderModuleCreateInfo createInfo = {
+        .sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
+        .codeSize = size,
+        .pCode = (uint32_t *)shaderData,
+    };
 
     VkShaderModule handle;
     if (vkCreateShaderModule(LogicalDevice, &createInfo, NULL, &handle))
@@ -56,15 +56,17 @@ void CreatePipeline(void)
 {
     CratePipelineLayout();
 
-    VkComputePipelineCreateInfo pipelineInfo;
-    memset(&pipelineInfo, 0, sizeof(pipelineInfo));
-    pipelineInfo.sType = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO;
-    pipelineInfo.layout = PipelineLayout;
-    pipelineInfo.basePipelineIndex = -1;
-    pipelineInfo.stage.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-    pipelineInfo.stage.stage = VK_SHADER_STAGE_COMPUTE_BIT;
-    pipelineInfo.stage.pName = "main";
-    pipelineInfo.stage.module = CreateComputeShader();
+    VkComputePipelineCreateInfo pipelineInfo = {
+        .sType = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO,
+        .layout = PipelineLayout,
+        .basePipelineIndex = -1,
+        .stage = (VkPipelineShaderStageCreateInfo) {
+            .sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,
+            .stage = VK_SHADER_STAGE_COMPUTE_BIT,
+            .pName = "main",
+            .module = CreateComputeShader(),
+        }
+    };
 
     if (vkCreateComputePipelines(LogicalDevice, VK_NULL_HANDLE, 1, &pipelineInfo, NULL, &Pipeline) != VK_SUCCESS)
     {

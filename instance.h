@@ -1,5 +1,4 @@
-#if !defined(INSTANCE_H)
-#define INSTANCE_H
+#pragma once
 
 #include <vulkan/vulkan.h>
 
@@ -8,5 +7,3 @@ extern VkPhysicalDevice PhysicalDevice;
 
 void GetPhysicalDevice(void);
 void CreateInstance(void);
-
-#endif // INSTANCE_H

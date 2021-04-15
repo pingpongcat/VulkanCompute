@@ -38,18 +38,17 @@ void CreateDeviceAndComuteQueue(void)
 
     float prio = 1.0f;
 
-    VkDeviceQueueCreateInfo queueCreateInfo;
-    memset(&queueCreateInfo, 0, sizeof(queueCreateInfo));
-    queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-    queueCreateInfo.queueFamilyIndex = ComputeQueueFamilyIndex;
-    queueCreateInfo.queueCount = 1;
-    queueCreateInfo.pQueuePriorities = &prio; 
+    VkDeviceCreateInfo deviceCreateInfo = {
+        .sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
+        .pQueueCreateInfos = &(VkDeviceQueueCreateInfo) {
+            .sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
+            .queueFamilyIndex = ComputeQueueFamilyIndex,
+            .queueCount = 1,
+            .pQueuePriorities = &prio,
+        },
+        .queueCreateInfoCount = 1,
 
-    VkDeviceCreateInfo deviceCreateInfo;
-    memset(&deviceCreateInfo, 0, sizeof(deviceCreateInfo));
-    deviceCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-    deviceCreateInfo.pQueueCreateInfos = &queueCreateInfo;
-    deviceCreateInfo.queueCreateInfoCount = 1;
+    };
 
     if (vkCreateDevice(PhysicalDevice, &deviceCreateInfo, NULL, &LogicalDevice) != VK_SUCCESS)
     {
@@ -62,10 +61,10 @@ void CreateDeviceAndComuteQueue(void)
 
 void CreateCommandPool(void)
 {
-    VkCommandPoolCreateInfo poolCreateInfo;
-    memset(&poolCreateInfo, 0, sizeof(poolCreateInfo));
-    poolCreateInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-    poolCreateInfo.queueFamilyIndex = ComputeQueueFamilyIndex;
+    VkCommandPoolCreateInfo poolCreateInfo = {
+        .sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
+        .queueFamilyIndex = ComputeQueueFamilyIndex,
+    };
 
     if (vkCreateCommandPool(LogicalDevice, &poolCreateInfo, NULL, &ComputeCmdPool) != VK_SUCCESS)
     {
