@@ -13,6 +13,7 @@ int main(int argc, char const *argv[])
     PrepareCommandBuffer();
     Compute();
     DestroyPipeline();
+    DestroyShaderModule();
     DestroyCommandPoolAndLogicalDevice();
     
     return 0;

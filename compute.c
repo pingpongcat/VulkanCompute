@@ -48,17 +48,34 @@ void PrepareCommandBuffer(void)
 
 int Compute(void){
 
+    VkFence fence;
+    VkFenceCreateInfo fenceCreateInfo = {
+        .sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO,
+    };
+
+    if (vkCreateFence(LogicalDevice, &fenceCreateInfo, NULL, &fence) != VK_SUCCESS)
+    {
+        printf("Failed to freate a fence\n");
+    }
+
     VkSubmitInfo submitInfo = {
         .sType = VK_STRUCTURE_TYPE_SUBMIT_INFO,
         .commandBufferCount = 1,
         .pCommandBuffers = &CommandBuffer,
     };
     
-    if (vkQueueSubmit(ComputingQueue, 1, &submitInfo, VK_NULL_HANDLE) != VK_SUCCESS)
+    if (vkQueueSubmit(ComputingQueue, 1, &submitInfo, fence) != VK_SUCCESS)
     {
-
         printf("Sumbiting the command bufer failed\n");
         return -1;
     }
+
+    if (vkWaitForFences(LogicalDevice, 1, &fence, VK_TRUE, 1000000000) != VK_SUCCESS)
+    {
+        printf("Failed to wait for a fence\n");
+    }
+
+    vkDestroyFence(LogicalDevice, fence, NULL);
+
     return 0;
 }

@@ -7,5 +7,6 @@ extern VkPipelineLayout PipelineLayout;
 
 void CreatePipeline(void);
 void DestroyPipeline(void);
+void DestroyShaderModule(void);
 
 
