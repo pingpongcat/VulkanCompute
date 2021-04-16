@@ -1,5 +1,6 @@
 project('VulkanCompute', 'c', default_options : ['c_std=c11'])
 vlk_dep = dependency('Vulkan')
+
 src = ['main.c',
     'compute.c',
     'instance.c',
@@ -18,9 +19,9 @@ endif
 
 glsl_validator = 'glslangValidator'
 
+# Compile shaders
 cs = run_command(glsl_validator, '-V', 'shader.comp', '-o', './build/shader.spv')
 
-# Compile shaders and move them do build directory
 if cs.returncode() != 0
     message('Could not comile shaders')
 endif
