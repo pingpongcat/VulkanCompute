@@ -13,6 +13,7 @@ uint32_t ComputeQueueFamilyIndex;
 VkDevice LogicalDevice = VK_NULL_HANDLE;
 VkQueue ComputingQueue = VK_NULL_HANDLE;
 VkCommandPool ComputeCmdPool = VK_NULL_HANDLE;
+VkDescriptorPool DescriptorPool = VK_NULL_HANDLE;
 
 void CreateDeviceAndComuteQueue(void)
 {
@@ -72,11 +73,33 @@ void CreateCommandPool(void)
     }
 }
 
+void CreateDescriptorPool(void)
+{
+    VkDescriptorPoolCreateInfo descriptorPoolCreateInfo = {
+        .sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO,
+        .maxSets = 1,
+        .pPoolSizes = &(VkDescriptorPoolSize){
+            .type = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            .descriptorCount = 2,
+        },
+        .poolSizeCount = 1,
+    };
+
+    if (vkCreateDescriptorPool(LogicalDevice, &descriptorPoolCreateInfo, NULL, &DescriptorPool) != VK_SUCCESS)
+    {
+        printf("Failed to create descriptor pool\n");
+    }
+}
+
 void DestroyCommandPoolAndLogicalDevice(void)
 {
     if (ComputeCmdPool != VK_NULL_HANDLE)
     {
         vkDestroyCommandPool(LogicalDevice, ComputeCmdPool, NULL);
+    }
+    if (DescriptorPool != VK_NULL_HANDLE)
+    {
+        vkDestroyDescriptorPool(LogicalDevice, DescriptorPool, NULL);
     }
     if(LogicalDevice != VK_NULL_HANDLE)
     {

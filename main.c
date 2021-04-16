@@ -9,6 +9,8 @@ int main(int argc, char const *argv[])
     GetPhysicalDevice();
     CreateDeviceAndComuteQueue();
     CreatePipeline();
+    CreateDescriptorPool();
+    CreateDescriptorSet();
     CreateCommandPool();    
     PrepareCommandBuffer();
     Compute();

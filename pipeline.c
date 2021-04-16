@@ -7,7 +7,8 @@
 
 VkPipeline Pipeline = VK_NULL_HANDLE;
 VkPipelineLayout PipelineLayout = VK_NULL_HANDLE;
-VkShaderModule ShaderModule = VK_NULL_HANDLE;
+VkShaderModule ComputeShaderModule = VK_NULL_HANDLE;
+VkDescriptorSetLayout DescriptorSetLayeout = VK_NULL_HANDLE;
 
 static size_t fileGetLenght(FILE *file)
 {
@@ -50,7 +51,7 @@ static void CreateComputeShader(void)
         .pCode = (uint32_t *)shaderData,
     };
 
-    if (vkCreateShaderModule(LogicalDevice, &createInfo, NULL, &ShaderModule))
+    if (vkCreateShaderModule(LogicalDevice, &createInfo, NULL, &ComputeShaderModule))
     {
         printf("Failed to create shader module\n");
         return;
@@ -58,10 +59,37 @@ static void CreateComputeShader(void)
 
 }
 
+void CreateDescriptorSetLayout(void)
+{
+    VkDescriptorSetLayoutCreateInfo createInfo = {
+        .sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO,
+        .bindingCount = 2,
+        .pBindings = (VkDescriptorSetLayoutBinding[2]){
+            [0].binding = 0,
+            [0].stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            [0].descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            [0].descriptorCount = 1,
+            [1].binding = 1,
+            [1].stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            [1].descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            [1].descriptorCount = 1,
+        },
+    };
+
+    if (vkCreateDescriptorSetLayout(LogicalDevice, &createInfo, NULL, &DescriptorSetLayeout) != VK_SUCCESS)
+    {
+        printf("Failed to create descriptor set layout handle\n");
+        return;
+    }
+
+}
+
 static void CratePipelineLayout(void)
 {
+    CreateDescriptorSetLayout();
     VkPipelineLayoutCreateInfo createInfo = {
         .sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO,
+        .pSetLayouts = &DescriptorSetLayeout,
     };
 
     if (vkCreatePipelineLayout(LogicalDevice, &createInfo, NULL, &PipelineLayout) != VK_SUCCESS)
@@ -84,7 +112,7 @@ void CreatePipeline(void)
             .sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,
             .stage = VK_SHADER_STAGE_COMPUTE_BIT,
             .pName = "main",
-            .module = ShaderModule,
+            .module = ComputeShaderModule,
         }};
 
     if (vkCreateComputePipelines(LogicalDevice, VK_NULL_HANDLE, 1, &pipelineInfo, NULL, &Pipeline) != VK_SUCCESS)
@@ -100,6 +128,10 @@ void DestroyPipeline()
     {
         vkDestroyPipelineLayout(LogicalDevice, PipelineLayout, NULL);
     }
+    if (DescriptorSetLayeout != VK_NULL_HANDLE)
+    {
+        vkDestroyDescriptorSetLayout(LogicalDevice, DescriptorSetLayeout, NULL);
+    }
     if (Pipeline != VK_NULL_HANDLE)
     {
         vkDestroyPipeline(LogicalDevice, Pipeline, NULL);
@@ -108,8 +140,8 @@ void DestroyPipeline()
 
 void DestroyShaderModule()
 {
-    if (ShaderModule != VK_NULL_HANDLE)
+    if (ComputeShaderModule != VK_NULL_HANDLE)
     {
-        vkDestroyShaderModule(LogicalDevice, ShaderModule, NULL);
+        vkDestroyShaderModule(LogicalDevice, ComputeShaderModule, NULL);
     }
 }

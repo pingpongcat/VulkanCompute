@@ -4,6 +4,7 @@
 
 extern VkPipeline Pipeline;
 extern VkPipelineLayout PipelineLayout;
+extern VkDescriptorSetLayout DescriptorSetLayeout;
 
 void CreatePipeline(void);
 void DestroyPipeline(void);
