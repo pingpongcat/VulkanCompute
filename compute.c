@@ -1,6 +1,8 @@
+#include <vulkan/vulkan.h>
+
 #include <string.h>
 #include <stdio.h>
-#include <vulkan/vulkan.h>
+
 #include "compute.h"
 #include "device.h"
 #include "instance.h"

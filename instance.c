@@ -1,12 +1,10 @@
 #include <vulkan/vulkan.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "instance.h"
 
-#ifdef _MSC_VER
-#define _CRT_SECURE_NO_WARNINGS
-#endif
+#include "instance.h"
 
 VkInstance Instance = VK_NULL_HANDLE;
 VkPhysicalDevice PhysicalDevice = VK_NULL_HANDLE;
