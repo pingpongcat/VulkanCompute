@@ -1,4 +1,5 @@
 project('VulkanCompute', 'c', default_options : ['c_std=c99'])
+
 vlk_dep = dependency('Vulkan')
 
 src = ['main.c',
@@ -25,4 +26,6 @@ if cs.returncode() != 0
 endif
 
 output = cs.stdout().strip()
+message(output)
 errortxt = cs.stderr().strip()
+message(errortxt)
