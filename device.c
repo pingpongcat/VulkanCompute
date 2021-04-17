@@ -7,6 +7,7 @@
 #include "compute.h"
 #include "instance.h"
 #include "pipeline.h"
+#include "memory.h"
 
 uint32_t ComputeQueueFamilyIndex;
 
@@ -101,6 +102,9 @@ void DestroyCommandPoolAndLogicalDevice(void)
     {
         vkDestroyDescriptorPool(LogicalDevice, DescriptorPool, NULL);
     }
+
+    DestroyBuffers();
+
     if(LogicalDevice != VK_NULL_HANDLE)
     {
         vkDestroyDevice(LogicalDevice,NULL);

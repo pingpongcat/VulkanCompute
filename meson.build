@@ -6,7 +6,8 @@ src = ['main.c',
     'compute.c',
     'instance.c',
     'device.c',
-    'pipeline.c']
+    'pipeline.c',
+    'memory.c']
 
 executable('VulkanCompute', src, dependencies : vlk_dep)
 

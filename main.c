@@ -2,6 +2,10 @@
 #include "instance.h"
 #include "device.h"
 #include "pipeline.h"
+#include "memory.h"
+
+uint32_t InputData[1000];
+float OutputData[1000];
 
 int main(int argc, char const *argv[])
 {
@@ -10,6 +14,7 @@ int main(int argc, char const *argv[])
     CreateDeviceAndComuteQueue();
     CreatePipeline();
     CreateDescriptorPool();
+    CreateBuffers(sizeof(InputData), sizeof(OutputData));
     CreateDescriptorSet();
     CreateCommandPool();    
     PrepareCommandBuffer();
