@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include "compute.h"
 #include "instance.h"
 #include "device.h"
@@ -7,6 +8,8 @@
 
  #define STB_IMAGE_WRITE_IMPLEMENTATION
  #include "stb_image_write.h"
+
+ #define COLOR_CHANNELS 4
 
 uint32_t InputData[1000];
 float OutputData[1000][1000];
@@ -49,12 +52,28 @@ int main(int argc, char const *argv[])
 
     CoppyToInputBuffer(InputData, sizeof(InputData));
 
+    double time_spent = 0.0;
+    clock_t begin = clock();
+
     generate();
-    stbi_write_bmp("fractactal_cpu.bmp", 1000, 1000, 4, OutputData);    
+
+    clock_t end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("Time of CPU generated fractal: %f s.\n", time_spent);
+
+    stbi_write_bmp("fractactal_cpu.bmp", 1000, 1000, COLOR_CHANNELS, OutputData);    
+
+    begin = clock();
 
     Compute();
     CoppyFromOutputBuffer(OutputData, sizeof(OutputData));
-    stbi_write_bmp("fractactal_gpu.bmp", 1000, 1000, 4, OutputData);    
+
+    end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("Time of GPU generated fractal: %f s.\n", time_spent);
+
+
+    stbi_write_bmp("fractactal_gpu.bmp", 1000, 1000, COLOR_CHANNELS, OutputData);    
 
     DestroyPipeline();
     DestroyShaderModule();
