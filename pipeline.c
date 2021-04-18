@@ -90,6 +90,7 @@ static void CratePipelineLayout(void)
     CreateDescriptorSetLayout();
     VkPipelineLayoutCreateInfo createInfo = {
         .sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO,
+        .setLayoutCount = 1,
         .pSetLayouts = &DescriptorSetLayeout,
     };
 

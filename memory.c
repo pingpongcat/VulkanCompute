@@ -93,7 +93,7 @@ void CreateBuffers(size_t inputSize, size_t outputSize)
         .dstBinding = 0,
         .descriptorCount = 2,
         .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-        .pBufferInfo = (VkDescriptorBufferInfo[]){
+        .pBufferInfo = (VkDescriptorBufferInfo[2]){
             [0].buffer = InputBuffer,
             [0].offset = 0,
             [0].range = inputSize,

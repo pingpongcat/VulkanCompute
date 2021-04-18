@@ -84,6 +84,8 @@ int Compute(void){
 
 void CreateDescriptorSet(void)
 {
+    CreateDescriptorPool();
+
     VkDescriptorSetAllocateInfo descriptorSetAllocInfo = {
         .sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO,
         .descriptorSetCount = 1,

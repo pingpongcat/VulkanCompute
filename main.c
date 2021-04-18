@@ -14,9 +14,9 @@ int main(int argc, char const *argv[])
     GetPhysicalDevice();
     CreateDeviceAndComuteQueue();
     CreatePipeline();
-    CreateDescriptorPool();
-    CreateBuffers(sizeof(InputData), sizeof(OutputData));
+    //CreateDescriptorPool();
     CreateDescriptorSet();
+    CreateBuffers(sizeof(InputData), sizeof(OutputData));
     CreateCommandPool();    
     PrepareCommandBuffer();
 
