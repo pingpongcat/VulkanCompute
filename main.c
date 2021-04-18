@@ -5,6 +5,9 @@
 #include "pipeline.h"
 #include "memory.h"
 
+ #define STB_IMAGE_WRITE_IMPLEMENTATION
+ #include "stb_image_write.h"
+
 uint32_t InputData[1000];
 float OutputData[1000][1000];
 
@@ -44,22 +47,14 @@ int main(int argc, char const *argv[])
     CreateCommandPool();    
     PrepareCommandBuffer();
 
-
-    
     CoppyToInputBuffer(InputData, sizeof(InputData));
 
     generate();
-    FILE *cpuFile = fopen("fractal_cpu.raw", "wb");
-    fwrite(OutputData, sizeof(OutputData), 1, cpuFile);
-    fclose(cpuFile);
-    
+    stbi_write_bmp("fractactal_cpu.bmp", 1000, 1000, 4, OutputData);    
+
     Compute();
-
     CoppyFromOutputBuffer(OutputData, sizeof(OutputData));
-
-    FILE *gpuFile = fopen("fractal_gpu.raw", "wb");
-    fwrite(OutputData, sizeof(OutputData), 1, gpuFile);
-    fclose(gpuFile);
+    stbi_write_bmp("fractactal_gpu.bmp", 1000, 1000, 4, OutputData);    
 
     DestroyPipeline();
     DestroyShaderModule();
