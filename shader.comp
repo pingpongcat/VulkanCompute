@@ -1,17 +1,30 @@
 #version 450
 
-layout (local_size_x = 512, local_size_y = 1, local_size_x = 1) in;
+layout (local_size_x = 1000, local_size_y = 1, local_size_x = 1) in;
 layout (set = 0, binding = 0, std430) buffer inputBuffer
 {
     uint valuesIn[];
 };
 layout (set = 0, binding = 1, std430) buffer outputBuffer
 {
-    float valuesOut[];
+    uint valuesOut[1000][1000];
 };
 
 
 void main()
 {
-    valuesOut[gl_LocalInvocationID.x] = valuesIn[gl_LocalInvocationID.x] * 1000.0;
+    //uint index = gl_LocalInvocationID.x + gl_WorkGroupID.x * 128;
+    //valuesOut[index] = valuesIn[index] * 1000.0;
+    float r = gl_WorkGroupID.x / 500.0 - 1.0;
+    float i = gl_LocalInvocationID.x / 500.0 - 1.0;
+
+    uint cnt = 0;
+    while ((r * r + i * i < 4.0) && (cnt < 63))
+    {
+        float temp = r*r - i * i + 0.17;
+        i = 2 * r * i + 0.57;
+        r = temp;
+        cnt++;
+    }
+    valuesOut[gl_WorkGroupID.x][gl_LocalInvocationID.x] = (cnt << 2) | 0xff000000;
 }

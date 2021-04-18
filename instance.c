@@ -37,7 +37,6 @@ void GetPhysicalDevice(){
     }
 
     PhysicalDevice = devices[dedicatedGPUidx];
-
     PhysicalDevice = devices[0];
 }
 
