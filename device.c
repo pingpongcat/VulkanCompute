@@ -18,7 +18,7 @@ VkDescriptorPool DescriptorPool = VK_NULL_HANDLE;
 
 void CreateDeviceAndComuteQueue(void)
 {
-    uint32_t count = 1;
+    uint32_t count = 0;
     vkGetPhysicalDeviceQueueFamilyProperties(PhysicalDevice, &count, NULL);
     VkQueueFamilyProperties families[count];
     vkGetPhysicalDeviceQueueFamilyProperties(PhysicalDevice, &count, families);
