@@ -30,11 +30,11 @@ void CreateDeviceAndComuteQueue(void)
     {
         ComputeQueueFamilyIndex++;
     }
+    free(families);
     
     if(ComputeQueueFamilyIndex == count)
     {
         printf("Compute family not found\n");
-        free(families);
         return;
     }
 
