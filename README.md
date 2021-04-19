@@ -11,6 +11,6 @@ ninja
 
 Winows  
 * install [clang](https://releases.llvm.org/download.html)
-* install [meson] (https://github.com/mesonbuild/meson/releases)
+* install [meson](https://github.com/mesonbuild/meson/releases)
 
 meson build --reconfigure --cross-file=cross_file.txt
