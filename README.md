@@ -4,12 +4,12 @@ Vulkan Compute example based on Udemy course [GPU computing in Vulkan](https://w
 
 ![Vulkan GPU fractal](http://mzajac.webd.pl/data/fractactal_gpu.png)
 
-Linux 
+Linux  
 meson build --reconfigure
 cd ./build
 ninja
 
-Winows
+Winows  
 * install [clang](https://releases.llvm.org/download.html)
 * install [meson] (https://github.com/mesonbuild/meson/releases)
 
