@@ -4,7 +4,7 @@ Vulkan Compute example based on Udemy course [GPU computing in Vulkan](https://w
 
 ![Vulkan GPU fractal](http://mzajac.webd.pl/data/fractactal_gpu.png)
 
-Linux
+Linux 
 meson build --reconfigure
 cd ./build
 ninja
