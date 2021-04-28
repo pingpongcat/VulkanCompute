@@ -83,10 +83,12 @@ void CreateBuffers(size_t inputSize, size_t outputSize) {
   InputBuffer = CreateBufferAndMemory(inputSize, &InputBufferMemory,
                                       VK_BUFFER_USAGE_STORAGE_BUFFER_BIT |
                                       VK_BUFFER_USAGE_TRANSFER_DST_BIT,
-                                      VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+                                       VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT);
+                                      //VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
   OutputBuffer = CreateBufferAndMemory(outputSize, &OutputBufferMemory,
                                        VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-                                       VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+                                       VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT);
+                                       //VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
 
   VkWriteDescriptorSet writeDescriptorSet = {
       .sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
