@@ -1,30 +1,29 @@
 #version 450
 
-layout (local_size_x = 1000, local_size_y = 1, local_size_x = 1) in;
+layout (local_size_x = 500, local_size_y = 1, local_size_x = 1) in;
 layout (set = 0, binding = 0, std430) buffer inputBuffer
 {
-    uint valuesIn[];
+    uvec4 valuesIn[2][2500];
 };
 layout (set = 0, binding = 1, std430) buffer outputBuffer
 {
-    uint valuesOut[1000][1000];
+    uint valuesOut[1];
 };
 
 
 void main()
 {
-    //uint index = gl_LocalInvocationID.x + gl_WorkGroupID.x * 128;
-    //valuesOut[index] = valuesIn[index] * 1000.0;
-    float r = gl_WorkGroupID.x / 500.0 - 1.0;
-    float i = gl_LocalInvocationID.x / 500.0 - 1.0;
-
-    uint cnt = 0;
-    while ((r * r + i * i < 4.0) && (cnt < 63))
+    vec4 maxValue = vec4(0 ,0 ,0, 0);
+    for (uint j = 0; j < 2500; j++)
     {
-        float temp = r*r - i * i + 0.17;
-        i = 2 * r * i + 0.57;
-        r = temp;
-        cnt++;
+        uint index = gl_LocalInvocationID.x + gl_WorkGroupID.x * 500;
+        mat4 value = outerProduct(valuesIn[0][index], valuesIn[1][j]);
+        maxValue = max(maxValue, value[0]); 
+        maxValue = max(maxValue, value[1]); 
+        maxValue = max(maxValue, value[2]); 
+        maxValue = max(maxValue, value[3]); 
     }
-    valuesOut[gl_WorkGroupID.x][gl_LocalInvocationID.x] = (cnt << 2) | 0xff000000;
+    vec2 result2 = max(maxValue.rg, maxValue.ba);
+    float result1 = max(result2[0], result2[1]);
+    atomicMax(valuesOut[0], uint(result1));
 }
