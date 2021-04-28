@@ -79,11 +79,17 @@ void CreateDescriptorPool(void)
     VkDescriptorPoolCreateInfo descriptorPoolCreateInfo = {
         .sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO,
         .maxSets = 1,
-        .pPoolSizes = &(VkDescriptorPoolSize){
+        .pPoolSizes = (VkDescriptorPoolSize[2]){
+            {
             .type = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-            .descriptorCount = 2,
+            .descriptorCount = 2
+            },
+            {
+            .type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+            .descriptorCount = 2
+            }
         },
-        .poolSizeCount = 1,
+        .poolSizeCount = 2,
     };
 
     if (vkCreateDescriptorPool(LogicalDevice, &descriptorPoolCreateInfo, NULL, &DescriptorPool) != VK_SUCCESS)

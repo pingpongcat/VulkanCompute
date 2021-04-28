@@ -1,13 +1,22 @@
 #version 450
 
 layout (local_size_x = 500, local_size_y = 1, local_size_x = 1) in;
-layout (set = 0, binding = 0, std430) buffer inputBuffer
+
+layout (set = 0, binding = 0) buffer inputBuffer
 {
     uvec4 valuesIn[2][2500];
 };
-layout (set = 0, binding = 1, std430) buffer outputBuffer
+layout (set = 0, binding = 1) buffer outputBuffer
 {
     uint valuesOut[1];
+};
+layout (set = 0, binding = 2) uniform inputBuffer1
+{
+    uvec4 valuesIn1[2500];
+};
+layout (set = 0, binding = 3) uniform inputBuffer2
+{
+    uint valuesIn2[2500];
 };
 
 
@@ -17,7 +26,7 @@ void main()
     for (uint j = 0; j < 2500; j++)
     {
         uint index = gl_LocalInvocationID.x + gl_WorkGroupID.x * 500;
-        mat4 value = outerProduct(valuesIn[0][index], valuesIn[1][j]);
+        mat4 value = outerProduct(valuesIn1[index], valuesIn2[j]);
         maxValue = max(maxValue, value[0]); 
         maxValue = max(maxValue, value[1]); 
         maxValue = max(maxValue, value[2]); 

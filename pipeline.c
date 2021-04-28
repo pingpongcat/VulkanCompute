@@ -64,16 +64,32 @@ void CreateDescriptorSetLayout(void)
 {
     VkDescriptorSetLayoutCreateInfo createInfo = {
         .sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO,
-        .bindingCount = 2,
-        .pBindings = (VkDescriptorSetLayoutBinding[2]){
-            [0].binding = 0,
-            [0].stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
-            [0].descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-            [0].descriptorCount = 1,
-            [1].binding = 1,
-            [1].stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
-            [1].descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-            [1].descriptorCount = 1,
+        .bindingCount = 4,
+        .pBindings = (VkDescriptorSetLayoutBinding[4]){
+            {
+            .binding = 0,
+            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            .descriptorCount = 1,
+            },
+            {
+            .binding = 1,
+            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            .descriptorCount = 1,
+            },
+            {
+            .binding = 2,
+            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            .descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+            .descriptorCount = 1,
+            },
+            {
+            .binding = 3,
+            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            .descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+            .descriptorCount = 1,
+            }
         },
     };
 
